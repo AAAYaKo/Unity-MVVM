@@ -6,11 +6,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityMVVM.Binding;
 using UnityMVVM.Model;
-using UnityMVVM.Util;
 
 namespace UnityMVVM.View
 {
-    [RequireComponent(typeof(CollectionViewSource))]
+    [RequireComponent(typeof(CollectionViewSource)), AddComponentMenu("Unity-MVVM/Views/CollectionViewBase")]
     public class CollectionViewBase : ViewBase, IDataBinding
     {
         public string SrcCollectionName
@@ -242,11 +241,11 @@ namespace UnityMVVM.View
             foreach (var item in newItems)
             {
                 var go = CreateCollectionItem(item, transform);
-                go.transform.SetSiblingIndex(newStartingIndex);
+                go.transform.SetSiblingIndex(newStartingIndex + idx);
 
                 gameObjects.Add(go);
 
-                InitItem(go, item, newStartingIndex);
+                InitItem(go, item, newStartingIndex + idx);
                 idx++;
             }
 
